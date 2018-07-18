@@ -1,0 +1,226 @@
+#!/bin/bash
+# SPDX-License-Identifier: LGPL-2.1-or-later
+# Copyright © 2009-2018 ANSSI. All Rights Reserved.
+
+# config-admin - Clip configuration update tool
+# Copyright (C) 2013 ANSSI
+# Authors:
+#   Thomas Calderon <clipos@ssi.gouv.fr>
+#   Mickaël Salaün <clipos@ssi.gouv.fr>
+# All rights reserved
+
+set -e
+
+. "/lib/clip/config-admin.sub"
+
+if [ ! -e "/lib/rc/sh/functions.sh" ]; then
+	einfo() {
+		logger -p local0.info -t "config-admin: info" -- "$*"
+	}
+	ewarn() {
+		logger -p local0.warn -t "config-admin: warning" -- "$*"
+	}
+	eerror() {
+		logger -p local0.err -t "config-admin: error" -- "$*"
+	}
+	ebegin() {
+		logger -p local0.info -t "config-admin: begin" -- "$*"
+	}
+	eend() {
+		local ret="error"
+		if [ "$1" -eq 0 ]; then
+			ret="OK"
+		fi
+		logger -p local0.info -t "config-admin: end" -- "${ret}"
+	}
+	eindent() {
+		true
+	}
+	eoutdent() {
+		true
+	}
+	die() {
+		logger -p local0.err -t "config-admin: die" -- "$*"
+		exit 1
+	}
+fi
+
+
+cleanup_confadmin() {
+	if [ "${ROOT##/tmp/}" != "${ROOT}" -a -d "${ROOT}" ]; then
+		rm -rf -- "${ROOT}"
+	fi
+}
+
+cleanup() {
+	set +e
+	cleanup_confadmin
+	if [ "${TMPD##/tmp/}" != "${TMPD}" -a -d "${TMPD}" ]; then
+		rm -rf -- "${TMPD}"
+	fi
+	trap - QUIT INT TERM EXIT
+}
+
+# usage: install_confadmin "/path/to/config/client0"
+install_confadmin() {
+	CONF_PATH="$1"
+
+	# FIXME: source /etc/conf.d/jail
+	CLIP_JAILS="rm_b rm_h"
+	ROOT="$(mktemp -d)"
+	CONF_BASE="${CONF_PATH}"
+	[ -d "${CONF_BASE}" ] || die "No CONF_BASE"
+
+	local mask
+	mask="$(umask)"
+	umask 0026
+	_install_confadmin_1
+	_install_confadmin_2
+	umask "${mask}"
+}
+
+#Basic implementation of signature
+verify_signature() {
+	local ret=0 tarhash signature
+	tarhash="$(openssl dgst -sha256 ${BUNDLE} 2> /dev/null)" || ret=1
+	#Only fetch the hash value
+	tarhash="$(echo $tarhash | cut -d' ' -f2)" || ret=1
+	signature="$(openssl rsautl -verify -inkey ${PUBKEY} -pkcs -pubin -in ${BUNDLE_SIGNATURE} 2> /dev/null)" || ret=1
+	#Only fetch the hash value
+	signature="$(echo $signature | cut -d' ' -f2)" || ret=1
+        if [ "${tarhash}" == "${signature}" ]; then
+		einfo "Signature OK"
+	else
+		eerror "Signature is INVALID"
+		ret=1
+	fi
+        return ${ret}
+}
+
+download_bundle() {
+	local ret=0
+	local bundle="${HOME}/${BUNDLE}"
+	local sig="${HOME}/${BUNDLE_SIGNATURE}"
+
+	einfo "Downloading bundle"
+	if [ -e "${bundle}" ]; then
+		einfo "Removing previous bundle"
+		rm "${bundle}" || ret=1
+	fi
+	if [ -e "${sig}" ]; then
+		einfo "Removing previous bundle signature"
+		rm "${sig}" || ret=1
+	fi
+	# TODO: --capath "${CONFIG_CA}" -crlfile "${CONFIG_CRL}" --cert-type PEM --cert "${CONFIG_CERT}" --key-type PEM --key "${CONFIG_KEY}" --tlsv1
+	curl -q --silent --user-agent "CLIP/config-admin" --output "${bundle}" --url "${BUNDLE_URL}" 2> /dev/null || ret=1
+	curl -q --silent --user-agent "CLIP/config-admin" --output "${sig}" --url "${BUNDLE_SIGNATURE_URL}" 2> /dev/null || ret=1
+	return ${ret}
+}
+
+decompress() {
+	local ret=0
+	einfo "Decompressing ${BUNDLE}"
+	tar -C "${TMPD}" -xzf "${BUNDLE}" || ret=1
+	return ${ret}
+}
+
+generate_list_hash() {
+	local ret=0
+	einfo "Generating list of files and hashes"
+	find "${ROOT}" -type f -print0  | xargs -0 sha256sum -- > "${FILELIST_AND_HASHES}" || ret=1
+	return ${ret}
+}
+
+backup_conf() {
+	local src="$1"
+	local dst="${BACKUP_DIR}/${src}"
+	mkdir -p -- "$(dirname -- "${dst}")" || return 1
+	cp -af -- "${src}" "${dst}" 2> /dev/null || return 1
+	return 0
+}
+
+compare_and_replace_files() {
+	local ret=0 gret=0 currenthash newhash currentstamp newstamp filepath
+	while read currenthash filepath; do
+
+		if [ -e "${filepath#$ROOT}" ]; then
+			einfo "${filepath#$ROOT} exist, let's compare it's hash value with ${filepath}"
+			#If file is owned by me, adding read perm is a more efficient test
+			if chmod u+r -- "${filepath#$ROOT}" 2> /dev/null; then
+				newhash="$(sha256sum -- "${filepath#$ROOT}" | cut -d' ' -f1)"
+				if [ "${currenthash}" == "${newhash}" ]; then
+					einfo "skipping identical"
+				else
+					einfo "backup to ${BACKUP_DIR} and replacing"
+					backup_conf "${filepath#$ROOT}" || ret=1
+					cp -af -- "${filepath}" "${filepath#$ROOT}" 2> /dev/null || ret=1
+				fi
+			else
+				ewarn "impossible to read file, try to use timestamps"
+				currentstamp="$(stat -c %Y "${filepath#$ROOT}")" || ret=1
+				newstamp="$(stat -c %Y "${filepath}")" || ret=1
+				if [ "${currenthash}" == "${newhash}" ]; then
+					einfo "timestamps OK"
+				else
+					eerror "timestamps are INVALID"
+					eerror "timestamps current:${currentstamp} new:${newstamp}"
+				fi
+			fi
+		else
+			einfo "file ${filepath#$ROOT} not found on machine, we'll write it then"
+			cp -af -- "${filepath}" "${filepath#$ROOT}" 2> /dev/null || ret=1
+		fi
+
+		if [ ! ${ret} -eq 0 ]; then
+			echo "${filepath}"
+		fi
+		[[ ${ret} -eq 0 ]] || gret=1
+		ret=0
+
+	done < "${FILELIST_AND_HASHES}"
+	return ${gret}
+}
+
+init_dirs() {
+	local dst
+	for dst in "$@"; do
+		dst="$(dirname -- "${dst}")"
+		if ! mkdir -p -- "${dst}"; then
+			die "Impossible to create ${dst}"
+		fi
+	done
+}
+
+######################### MAIN ################################
+
+#Create TMPDIR
+TMPD="$(mktemp -d)"
+HOME="${HOME:-/home/admin}"
+
+#TODO: ADD IN CONFIGURATION FILE
+BUNDLE_DIR="${HOME}"
+BACKUP_DIR="${HOME}/oldconf"
+BUNDLE="conf-archive.tar.gz"
+BUNDLE_SIGNATURE="${BUNDLE}.sig"
+FILELIST_AND_HASHES="${HOME}/filelist.txt"
+PUBKEY="${HOME}/publickey.pem"
+
+#TODO: Be able to use @ETH0@ et @HOSTNAME@ like CLIP-Pkg-Download
+BUNDLE_URL="file:///var/update-conf/${BUNDLE}"
+BUNDLE_SIGNATURE_URL="file:///var/update-conf/${BUNDLE_SIGNATURE}"
+
+trap cleanup QUIT INT TERM EXIT
+
+init_dirs "${BUNDLE_DIR}/x" "${BACKUP_DIR}/x" "${FILELIST_AND_HASHES}"
+
+download_bundle
+
+verify_signature
+
+decompress
+
+install_confadmin "${TMPD}"
+
+generate_list_hash
+
+compare_and_replace_files

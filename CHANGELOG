@@ -1,0 +1,662 @@
+# CLIP ChangeLog for app-clip/clip-config
+
+*clip-config-2.4.21 (07 Jul 2015)
+
+  07 Jul 2015; Tony Cheneau <clipos@ssi.gouv.fr>
+  +clip-config-2.4.21.ebuild, -clip-config-2.4.20.ebuild:
+  Date configuration is more straightforward: changes to month and year can now
+  be directly applied.
+
+*clip-config-2.4.20 (19 Sep 2014)
+
+  19 Sep 2014; Hugo Chargois <clipos@ssi.gouv.fr>
+  +clip-config-2.4.20.ebuild, -clip-config-2.4.19.ebuild:
+  clip-audit-config - add support for KEEP_DAYS.
+
+*clip-config-2.4.19 (04 Jul 2014)
+
+  04 Jul 2014; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.4.19.ebuild, -clip-config-2.4.18.ebuild:
+  clip-audit-config - add REMOTE_LOG_OTHER.
+
+*clip-config-2.4.18 (11 Jun 2014)
+
+  11 Jun 2014; Tony Cheneau <clipos@ssi.gouv.fr>
+  +clip-config-2.4.18.ebuild, -clip-config-2.4.17.ebuild:
+  Change warning message when specifying DNS server on the RMB tab. This
+  reflects a recent change in the implementation behavior.
+
+*clip-config-2.4.17 (10 Jun 2014)
+
+  10 Jun 2014; Hugo Chargois <clipos@ssi.gouv.fr>
+  +clip-config-2.4.17.ebuild, -clip-config-2.4.16.ebuild:
+  Add TLS tunnels widget to RMB tab.
+
+*clip-config-2.4.16 (03 Jun 2014)
+
+  03 Jun 2014; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.4.16.ebuild, -clip-config-2.4.15.ebuild:
+  Always show the inheritable tabs for the default network
+  profile, even when that profile is a no-network one.
+
+*clip-config-2.4.15 (28 May 2014)
+
+  28 May 2014; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.4.15.ebuild, -clip-config-2.4.14.ebuild:
+  Fix switching from a net profile with a given IPsec gateway
+  activated to one that does not have that same gateway activated.
+
+*clip-config-2.4.14 (24 Mar 2014)
+
+  24 Mar 2014; Hugo Chargois <clipos@ssi.gouv.fr>
+  +clip-config-2.4.14.ebuild, -clip-config-2.4.13.ebuild:
+  Fix display bug (inherited section) for good this time.
+
+*clip-config-2.4.13 (11 Feb 2014)
+
+  11 Feb 2014; Tony Cheneau <clipos@ssi.gouv.fr>
+  +clip-config-2.4.13.ebuild, -clip-config-2.4.12.ebuild:
+  Fix display bug (inherited section).
+
+*clip-config-2.4.12 (24 Jan 2014)
+
+  24 Jan 2014; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.4.12.ebuild, -clip-config-2.4.11.ebuild:
+  Devices configuration :
+    - Support 'none' for webcam attribution 
+    - Add a sound capture checkbox
+
+*clip-config-2.4.11 (20 Jan 2014)
+
+  20 Jan 2014; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.4.11.ebuild, -clip-config-2.4.10.ebuild:
+  Do not exit on a fatalError() when listing wireless networks
+  fails.
+
+*clip-config-2.4.10 (23 Dec 2013)
+
+  23 Dec 2013; Hugo Chargois <clipos@ssi.gouv.fr>
+  +clip-config-2.4.10.ebuild, -clip-config-2.4.9.ebuild:
+  Fix crashes due to bad error handling when reading malformed
+  hosts or tls_tunnels configuration files.
+
+*clip-config-2.4.9 (20 Dec 2013)
+
+  20 Dec 2013; Hugo Chargois <clipos@ssi.gouv.fr>
+  +clip-config-2.4.9.ebuild, -clip-config-2.4.8.ebuild:
+  UX improvements in hosts file configuration widget.
+
+*clip-config-2.4.8 (18 Dec 2013)
+
+  18 Dec 2013; Hugo Chargois <clipos@ssi.gouv.fr>
+  +clip-config-2.4.8.ebuild, -clip-config-2.4.7.ebuild:
+  Add widget for hosts file configuration.
+
+*clip-config-2.4.7 (12 Dec 2013)
+
+  12 Dec 2013; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.4.7.ebuild, -clip-config-2.4.6.ebuild:
+  Update pkg download messages to reflect the fact that 
+  clip_install is now run automatically after a successful 
+  download.
+
+*clip-config-2.4.6 (22 Nov 2013)
+
+  22 Nov 2013; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.4.6.ebuild, -clip-config-2.4.5.ebuild:
+  Add optional RMB gateway configuration to the network config
+  interface.
+
+*clip-config-2.4.5 (15 Nov 2013)
+
+  15 Nov 2013; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.4.5.ebuild, -clip-config-2.4.4.ebuild:
+  Add smartcard configuration options to the device config.
+
+*clip-config-2.4.4 (23 Aug 2013)
+
+  23 Aug 2013; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.4.4.ebuild, -clip-config-2.4.3.ebuild:
+  Network profiles: create resolv.conf as world-readable in CLIP.
+
+*clip-config-2.4.3 (23 Aug 2013)
+
+  23 Aug 2013; Yves-Alexis Perez <clipos@ssi.gouv.fr>
+  +clip-config-2.4.3.ebuild, -clip-config-2.4.2.ebuild:
+  Network profiles: create hosts and hostname files as world readable.
+
+*clip-config-2.4.2 (05 Aug 2013)
+
+  05 Aug 2013; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.4.2.ebuild, -clip-config-2.4.1.ebuild:
+  Devices : switch sound card dynamically.
+
+*clip-config-2.4.1 (19 Jul 2013)
+
+  19 Jul 2013; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.4.1.ebuild, -clip-config-2.4.0.ebuild:
+  Download sources : add [local=true] to local RM mirrors
+  in generated sources.list.
+
+*clip-config-2.4.0 (28 May 2013)
+
+  28 May 2013; Hugo Chargois <clipos@ssi.gouv.fr>
+  +clip-config-2.4.0.ebuild, -clip-config-2.3.19-r1.ebuild:
+  Add support for inheritance of network profiles.
+
+*clip-config-2.3.19-r1 (10 May 2013)
+
+  10 May 2013; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.19-r1.ebuild, -clip-config-2.3.19.ebuild,
+  -files/confs-livecd/*, +files/confs-livecd/*.clip1, 
+  +files/confs-livecd/*.clip2:
+  We need to provide different configs for clip1 and clip2 in
+  the installer, since we cannot rely anymore on /clip1 being 
+  mounted while clip2 is being installed.
+
+*clip-config-2.3.19 (25 Apr 2013)
+
+  25 Apr 2013; Mickaël Salaün <clipos@ssi.gouv.fr>
+  +clip-config-2.3.19.ebuild, -clip-config-2.3.18-r1.ebuild:
+  Fix net profile mode creation.
+
+*clip-config-2.3.18-r1 (12 Apr 2013)
+
+  12 Apr 2013; Yves-Alexis Perez <clipos@ssi.gouv.fr>
+  +clip-config-2.3.18-r1.ebuild, -clip-config-2.3.18.ebuild:
+  Add build-dependency on userd-server for smartcards related commands.
+
+*clip-config-2.3.18 (10 Apr 2013)
+
+  10 Apr 2013; Yves-Alexis Perez <clipos@ssi.gouv.fr>
+  +clip-config-2.3.18.ebuild, -clip-config-2.3.17.ebuild:
+  Fix webcam variable name for hotplug scripts.
+
+*clip-config-2.3.17 (25 Mar 2013)
+
+  19 Mar 2013; ANSSI <clipos@ssi.gouv.fr>
+  +clip-config-2.3.17.ebuild, -clip-config-2.3.16.ebuild:
+  Support migrating to smartcard authentication.
+
+*clip-config-2.3.16 (19 Mar 2013)
+
+  19 Mar 2013; Hugo Chargois <clipos@ssi.gouv.fr>
+  +clip-config-2.3.16.ebuild, -clip-config-2.3.15.ebuild:
+  Allow configuration of TLS tunnels for RM_H.
+
+*clip-config-2.3.15 (05 Mar 2013)
+
+  05 Mar 2013; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.15.ebuild, -clip-config-2.3.14.ebuild:
+  Support defining SNAT_CLIENT_NETWORKS on gateways.
+
+*clip-config-2.3.14 (22 Feb 2013)
+
+  22 Feb 2013; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.14.ebuild, -clip-config-2.3.13.ebuild:
+  Cosmetic changes, rename RM_x to Haut/Bas.
+
+*clip-config-2.3.13 (11 Jan 2013)
+
+  11 Jan 2013; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.13.ebuild, -clip-config-2.3.12.ebuild:
+  Add configuration of Ping netfilter rules.
+
+*clip-config-2.3.12 (12 Oct 2012)
+
+  12 Oct 2012; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.12.ebuild, -clip-config-2.3.11.ebuild:
+  Add webcam device control.
+
+*clip-config-2.3.11 (03 Oct 2012)
+
+  03 Oct 2012; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.11.ebuild, -clip-config-2.3.10.ebuild:
+  Fix list_optional for install media.
+
+*clip-config-2.3.10 (04 Sep 2012)
+
+  04 Sep 2012; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.10.ebuild, -clip-config-2.3.9.ebuild:
+  Fix list_optional - update apt cache each time we generate the
+  package cache.
+
+*clip-config-2.3.9 (09 Aug 2012)
+
+  09 Aug 2012; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.9.ebuild, -clip-config-2.3.8.ebuild:
+  Change the way we list optional packages - rather than having
+  clip_download generate the final list of selected/unselected
+  packages, have it generate a 'cached' list of packages, which
+  is then compared to the current selected list by clip-config.
+  Also make it so that list_optional.pl can be used directly by
+  clip-install-config, instead of relying on a separate script.
+
+*clip-config-2.3.8 (14 Jun 2012)
+
+  14 Jun 2012; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.8.ebuild, -clip-config-2.3.7.ebuild:
+  Support more clip-download error codes.
+
+*clip-config-2.3.7 (05 Jun 2012)
+
+  05 Jun 2012; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.7.ebuild, -clip-config-2.3.6.ebuild:
+  Support dynamic IP gateways.
+  Simplified gateway configuration tabs.
+
+*clip-config-2.3.6 (30 Apr 2012)
+
+  30 Apr 2012; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.6.ebuild, -clip-config-2.3.5.ebuild:
+  Support dynamic IPs for jails, and a separate AUDIT gateway.
+
+*clip-config-2.3.5 (20 Apr 2012)
+
+  20 Apr 2012; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.5.ebuild, -clip-config-2.3.4.ebuild:
+  Display optional packages ordered by category-fr.
+
+*clip-config-2.3.4 (19 Mar 2012)
+
+  19 Mar 2012; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.4.ebuild, -clip-config-2.3.3.ebuild:
+  Change local addresses config : switch to hardcoded, local-only
+  addresses for some jails, add optional addresses for ADMIN and
+  AUDIT.
+
+*clip-config-2.3.3 (15 Mar 2012)
+
+  15 Mar 2012; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.3.ebuild, -clip-config-2.3.2.ebuild:
+  Support multiple gateways.
+
+*clip-config-2.3.2 (31 Jan 2012)
+
+  31 Jan 2012; Mickaël Salaün <clipos@ssi.gouv.fr>
+  +clip-config-2.3.2.ebuild, -clip-config-2.3.1.ebuild:
+  list_optional.pl - add apt.conf file optional parameter (-a).
+
+*clip-config-2.3.1 (29 Dec 2011)
+
+  29 Dec 2011; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.1.ebuild, -clip-config-2.3.0.ebuild:
+  Fix timechange when days|months|hours|minutes|seconds are < 10...
+
+*clip-config-2.3.0 (28 Dec 2011)
+
+  28 Dec 2011; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.3.0.ebuild, -clip-config-2.2.13.ebuild:
+  Add device attribution interface for usb and sound devices.
+  Add time/date configuration interface.
+  Add lots of icons everywhere 'cause its Christmas.
+
+*clip-config-2.2.13 (26 Oct 2011)
+
+  26 Oct 2011; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.2.13.ebuild, -clip-config-2.2.12.ebuild:
+  Support ADMIN_TARGETS on gateways.
+
+*clip-config-2.2.12 (20 Oct 2011)
+
+  20 Oct 2011; Mickaël Salaün <clipos@ssi.gouv.fr>
+  +clip-config-2.2.12.ebuild, -clip-config-2.2.11.ebuild:
+  Fix clippkg_get_confname call.
+
+*clip-config-2.2.11 (01 Aug 2011)
+
+  01 Aug 2011; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.2.11.ebuild, -clip-config-2.2.10-r1.ebuild,
+  +files/configs-livecd:
+  clip-config -U (package manager): 
+   - import the list of optional packages from a file created 
+   by clip_download, if it exists, to avoid having to re-parse
+   the whole mirror on startup.
+   - reset the list of optional packages after a successful
+   download, to correctly update the GUI based on the (possibly)
+   new configuration.
+  Add livecd-specific apt config files, so that list_optional.pl
+  can be run successfully from the livecd environment, to initialize
+  optional package lists.
+
+*clip-config-2.2.10-r1 (08 Jul 2011)
+
+  08 Jul 2011; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.2.10-r1.ebuild, -clip-config-2.2.10.ebuild:
+  Do not add dependencies on core packages dev-perl/CLIP-*
+  with clip-deps.
+
+*clip-config-2.2.10 (21 Jun 2011)
+
+  21 Jun 2011; Mickaël Salaün <clipos@ssi.gouv.fr>
+  +clip-config-2.2.10.ebuild, -clip-config-2.2.9.ebuild:
+  Refactoring the detection of configuration packages.
+  Add dependencies dev-perl/CLIP-*.
+
+*clip-config-2.2.9 (10 May 2011)
+
+  10 May 2011; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.2.9.ebuild, -clip-config-2.2.8.ebuild:
+  Support defining a PEER_ADDR on gateway configs. Support 
+  defining ADMIN_CLEAR_ADDR for cleartext admin interfaces.
+  Fix ETH2_ADDR import. 
+
+*clip-config-2.2.8 (06 Apr 2011)
+
+  06 Apr 2011; Mickaël Salaün <clipos@ssi.gouv.fr>
+  +clip-config-2.2.8.ebuild, -clip-config-2.2.7.ebuild:
+  Move var-update.sh feature to clip-menu-xdg.
+
+*clip-config-2.2.7 (02 Mar 2011)
+
+  02 Mar 2011; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.2.7.ebuild, -clip-config-2.2.6.ebuild:
+  Simplify var-update.sh, run it synchronously at profile 
+  creation/deletion. 
+  Support whitespace chars in WPA keys.
+
+*clip-config-2.2.6 (21 Feb 2011)
+
+  21 Feb 2011; Mickaël Salaün <clipos@ssi.gouv.fr>
+  +clip-config-2.2.6.ebuild, -clip-config-2.2.5.ebuild:
+  Run var-update.sh for profile modification.
+
+*clip-config-2.2.5 (31 Jan 2011)
+
+  31 Jan 2011; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.2.5.ebuild, -clip-config-2.2.4.ebuild:
+  Fix behavior when loading a net profile for which the required
+  network interface is not present.
+
+*clip-config-2.2.4 (06 Jan 2011)
+
+  06 Jan 2011; Mickaël Salaün <clipos@ssi.gouv.fr>
+  +clip-config-2.2.4.ebuild, -clip-config-2.2.3.ebuild:
+  Set PIN length up to 8.
+
+*clip-config-2.2.3 (09 Nov 2010)
+
+  09 Nov 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.2.3.ebuild, -clip-config-2.2.2.ebuild:
+  Fix spurious DHCP warnings when switching to a wifi profile.
+
+*clip-config-2.2.2 (03 Nov 2010)
+
+  03 Nov 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.2.2.ebuild, -clip-config-2.2.1.ebuild:
+  Fix locking / unlocking of update downloads when cloning
+  a net profile or changing interfaces.
+  Extend username regexp to 32 chars max instead of just 8.
+  Reduce height of some windows.
+
+*clip-config-2.2.1 (11 Oct 2010)
+
+  11 Oct 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.2.1.ebuild, -clip-config-2.2.0.ebuild:
+  Add ADMIN_NETWORKS field for gateways.
+  Get error messages from /usr/local/var/net_error on net profile
+  error.
+
+*clip-config-2.2.0 (24 Sep 2010)
+
+  24 Sep 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.2.0.ebuild, -clip-config-2.1.4.ebuild:
+  Add clip-audit-config for audit configuration.
+  Add ADMIN gateway configuration.
+  Fix advanced tabs that used to remain disabled.
+
+*clip-config-2.1.4 (20 Sep 2010)
+
+  20 Sep 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.1.4.ebuild, -clip-config-2.1.3.ebuild:
+  Add clip_download sources configuration GUI.
+  Merge clip-config-netconst into clip-config.
+
+  10 Sep 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  clip-config-2.1.3.ebuild:
+  Add missing verictl entry for clip-config-netconst.
+
+*clip-config-2.1.3 (09 Sep 2010)
+
+  09 Sep 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.1.3.ebuild, -clip-config-2.1.2.ebuild:
+  Add clip-config-netconst to configure internal jail addresses.
+
+*clip-config-2.1.2 (02 Sep 2010)
+
+  02 Sep 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.1.2.ebuild, -clip-config-2.1.1.ebuild:
+  Make socket paths configurable, for use on livecd.
+
+*clip-config-2.1.1 (01 Sep 2010)
+
+  01 Sep 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.1.1.ebuild, -clip-config-2.1.0.ebuild:
+  Use newer ClipQt, move some more code to it.
+
+*clip-config-2.1.0 (04 Aug 2010)
+
+  04 Aug 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.1.0.ebuild, -clip-config-2.0.4-r1.ebuild:
+  Some of the code moved to ClipQt. 
+  Net config: add no network mode.
+
+*clip-config-2.0.4-r1 (22 Jul 2010)
+
+  22 Jul 2010; Olivier Levillain <clipos@ssi.gouv.fr>
+  +clip-config-2.0.4-r1.ebuild, -clip-config-2.0.4.ebuild:
+  Net config: removal of non pertinent dialog boxes asking to
+  save an unchanged profile.
+
+*clip-config-2.0.4 (05 Jul 2010)
+
+  05 Jul 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.0.4.ebuild, -clip-config-2.0.3.ebuild:
+  Net config: support generic per-profile download locking.
+
+*clip-config-2.0.3 (26 May 2010)
+
+  26 May 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.0.3.ebuild, -clip-config-2.0.2.ebuild:
+  Fix ports lists.
+
+*clip-config-2.0.2 (26 May 2010)
+
+  26 May 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.0.2.ebuild, -clip-config-2.0.1.ebuild:
+  Support FTP output configuration for RM_H and RM_B.
+
+*clip-config-2.0.1 (25 May 2010)
+
+  25 May 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.0.1.ebuild, -clip-config-2.0.0.ebuild:
+  Fix numerous bugs in qt4 version + switch to a 
+  QtSingleApplication for each type of clip-config role, so
+  that users won't be able to launch two windows of the same
+  type at the same time.
+
+*clip-config-2.0.0 (21 May 2010)
+
+  21 May 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-2.0.0.ebuild, -clip-config-1.2.2.ebuild:
+  Port to qt4.
+
+*clip-config-1.2.2 (27 Apr 2010)
+
+  27 Apr 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.2.2.ebuild, -clip-config-1.2.1-r1.ebuild:
+  Support extra routes configuration and Ad-Hoc wireless
+  networks.
+
+*clip-config-1.2.1-r1 (08 Apr 2010)
+
+  08 Apr 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.2.1-r1.ebuild, -clip-config-1.2.1.ebuild:
+  Remove RDEPEND on clip-lib if use core-deps.
+
+*clip-config-1.2.1 (29 Jan 2010)
+
+  29 Jan 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.2.1.ebuild, -clip-config-1.2.0.ebuild:
+  Fix bug in AddUser dialog : RM_H size remained equal to 
+  the total size whatever was put in RM_B size.
+
+*clip-config-1.2.0 (27 Jan 2010)
+
+  27 Jan 2010; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.2.0.ebuild, -clip-config-1.1.9.ebuild:
+  Remove IUSE core-rm - clip-config now supports 0, 1 or 2
+  RM jails dynamically.
+  Support network configuration on gateways.
+
+*clip-config-1.1.9 (22 Dec 2009)
+
+  22 Dec 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.1.9.ebuild, -clip-config-1.1.8.ebuild:
+  Display MAC adresses of interfaces, when available.
+
+*clip-config-1.1.8 (15 Dec 2009)
+
+  15 Dec 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.1.8.ebuild, -clip-config-1.1.7.ebuild:
+  Typo fix by Olivier Levillain.
+
+*clip-config-1.1.7 (05 Nov 2009)
+
+  05 Nov 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.1.7.ebuild, -clip-config-1.1.6.ebuild:
+  Fix WPA_PSK / WPA_PASSWORD confusions in WPA_EAP.
+
+*clip-config-1.1.6 (02 Nov 2009)
+
+  02 Nov 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.1.6.ebuild, -clip-config-1.1.5.ebuild:
+  Add support for 'nomad' user type.
+
+*clip-config-1.1.5 (28 Oct 2009)
+
+  28 Oct 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.1.5.ebuild, -clip-config-1.1.4.ebuild:
+  Initial support for umts.
+
+*clip-config-1.1.4 (01 Oct 2009)
+
+  01 Oct 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.1.4.ebuild, -clip-config-1.1.3.ebuild:
+  Add support for hidden essid in wireless scan.
+
+*clip-config-1.1.3 (29 Sep 2009)
+
+  29 Sep 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.1.3.ebuild, -clip-config-1.1.2.ebuild:
+  Support net interface MTU configuration.
+
+*clip-config-1.1.2 (22 Sep 2009)
+
+  22 Sep 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.1.2.ebuild, -clip-config-1.1.1.ebuild:
+  Filter list_optional.pl output based on CLIP-Jails fields.
+
+*clip-config-1.1.1 (16 Sep 2009)
+
+  16 Sep 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.1.1.ebuild, -clip-config-1.1.ebuild:
+  Make the user add dialog's password widgets behave the same way as
+  those of the password change dialog. Smallish fixes.
+
+*clip-config-1.1 (11 Sep 2009)
+
+  11 Sep 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.1.ebuild, -clip-config-1.0.ebuild:
+  Add support for password changing (new executable : clip-chpw).
+
+*clip-config-1.0 (09 Sep 2009)
+
+  09 Sep 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-1.0.ebuild, -clip-config-0.9.9.ebuild:
+  Add functionnal user management.
+  Misc usability improvements for network config.
+
+*clip-config-0.9.9 (07 Sep 2009)
+
+  07 Sep 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-0.9.9.ebuild, -clip-config-0.9.8.ebuild:
+  Add wifi list.
+
+*clip-config-0.9.8 (02 Sep 2009)
+
+  02 Sep 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-0.9.8.ebuild, -clip-config-0.9.7.ebuild:
+  Add proxy management support.
+
+*clip-config-0.9.7 (28 Aug 2009)
+
+  28 Aug 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-0.9.7.ebuild, -clip-config-0.9.6.ebuild:
+  Use clippkg_cache_get_all_fields() in lister script to avoid
+  errors due to multiple apt sources.
+
+*clip-config-0.9.6 (25 Aug 2009)
+
+  25 Aug 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-0.9.6.ebuild, -clip-config-0.9.5.ebuild:
+  Full-fledged package management tool, supporting multiple
+  tabs for multiple distros + download launcher button (N.B. :
+  sources.list edition will remain a separate action, in the
+  "Advanced" menu).
+  Support --enable-rm / --disable-rm configure switches, to 
+  build a workable clip-config on RM-less configs.
+
+*clip-config-0.9.5 (20 Aug 2009)
+
+  20 Aug 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-0.9.5.ebuild, -clip-config-0.9.4.ebuild,
+  +files/conf:
+  Add new optional packages configuration GUI. Requires 
+  clip-core-conf-4.0.8.
+
+*clip-config-0.9.4 (15 Jul 2009)
+
+  15 Jul 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-0.9.4.ebuild, -clip-config-0.9.3.ebuild:
+  Allow whitespaces in wireless essids.
+
+*clip-config-0.9.3 (08 Jul 2009)
+
+  08 Jul 2009; Olivier Levillain <clipos@ssi.gouv.fr>
+  +clip-config-0.9.3.ebuild, -clip-config-0.9.2.ebuild:
+  Remove the possibility of creating an empty profile. Add the
+  password blinding. Add a wait window. Handle smoothly ports
+  intervals.
+
+*clip-config-0.9.2 (23 Jun 2009)
+
+  23 Jun 2009; Olivier Levillain <clipos@ssi.gouv.fr>
+  +clip-config-0.9.2.ebuild, -clip-config-0.9.1.ebuild:
+  Some parameters are case sensitive and were not taken written
+  correctly. Add correct support of QT translations.
+
+*clip-config-0.9.1 (19 Jun 2009)
+
+  19 Jun 2009; Olivier Levillain <clipos@ssi.gouv.fr>
+  +clip-config-0.9.1.ebuild, -clip-config-0.9.ebuild:
+  Add the detection of has_wifi to choose whether to present the
+  Wifi tab or not. Correction of a bug about DHCP selection.
+
+*clip-config-0.9 (17 Jun 2009)
+
+  17 Jun 2009; Olivier Levillain <clipos@ssi.gouv.fr>
+  +clip-config-0.9.ebuild, -clip-config-0.1-r1.ebuild:
+  Add support for multiple profiles and wifi.
+
+*clip-config-0.1-r1 (12 Jun 2009)
+
+  12 Jun 2009; Vincent Strubel <clipos@ssi.gouv.fr>
+  +clip-config-0.1-r1.ebuild, -clip-config-0.1.ebuild:
+  Adapt paths for netconf.d. 
+
+*configclt-0.1 (29 May 2009)
+
+  29 May 2009; Olivier Levillain <clipos@ssi.gouv.fr>
+  +configclt-0.1.ebuild:
+  Initial import.

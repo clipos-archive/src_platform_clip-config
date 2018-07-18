@@ -1,0 +1,219 @@
+################# configure part ##############################
+CC = @CC@
+CXX = @CXX@
+MOC = moc
+srcdir = @srcdir@
+SHELL = @SHELL@
+PREFIX = @prefix@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+bindir = @bindir@
+
+netconfd_path = @netconfd_path@
+netconf_link = @netconf_link@
+netd_socket = @netd_socket@
+default_profilename = @default_profilename@
+haswifi_flag = @haswifi_flag@
+userd_socket = @userd_socket@
+with_rm = @with_rm@
+
+CFLAGS = @CFLAGS@
+CXXFLAGS = @CXXFLAGS@ -DNETCONFD_PATH=\"${netconfd_path}\" -DNETCONF_LINK=\"${netconf_link}\" \
+	 -DNETD_SOCKET=\"${netd_socket}\" -DHASWIFI_FLAG=\"${haswifi_flag}\" \
+	 -DDEFAULT_PROFILENAME=\"${default_profilename}\" -DUSERD_SOCKET=\"${userd_socket}\"
+LDFLAGS = @LDFLAGS@ @QT4_GUI_LIBS@ -lQtSolutions_SingleApplication-2.6
+
+IFLAGS = -I. @QT4_GUI_CFLAGS@ -I /usr/include/clip -I/usr/include/qt4/QtSolutions -DPREFIX=\"${PREFIX}\"
+
+CLIPCONFIG := clip-config
+CLIPCONFIG_MOC =frmNetMain.moc.cpp	\
+		frmNetConst.moc.cpp	\
+		frmNetAdd.moc.cpp	\
+		frmWifiSelect.moc.cpp	\
+		frmDownloadMain.moc.cpp \
+		frmDevicesMain.moc.cpp  \
+		frmDateTime.moc.cpp	\
+		AddrsField.moc.cpp \
+		InheritSection.moc.cpp \
+		RoutesField.moc.cpp \
+		PortsField.moc.cpp	\
+		PortsWidget.moc.cpp	\
+		ProxyField.moc.cpp \
+		ProxyWidget.moc.cpp \
+		NetTab.moc.cpp \
+		NetAddrTab.moc.cpp \
+		NetAdminTab.moc.cpp \
+		NetFilterTab.moc.cpp \
+		NetGwTab.moc.cpp \
+		NetInterfaceTab.moc.cpp \
+		NetJailTab.moc.cpp \
+		NetPeerTab.moc.cpp \
+		NetUmtsTab.moc.cpp \
+		NetWifiTab.moc.cpp \
+		PkgTableItem.moc.cpp \
+		PkgListTab.moc.cpp \
+		TlsTunnelWidget.moc.cpp \
+		YesNoField.moc.cpp \
+		DownloadSourcesFrame.moc.cpp \
+		frmPkgMain.moc.cpp \
+		frmUsersMain.moc.cpp	\
+		frmUsersAdd.moc.cpp	\
+		frmUsersMigrate.moc.cpp \
+		HostsWidget.moc.cpp \
+
+CLIPCONFIG_SRC =clip-config.cpp	\
+		consts.cpp	\
+		qtcommon.cpp	\
+		AddrsField.cpp  \
+		InheritSection.cpp \
+		RoutesField.cpp	\
+		PortsField.cpp	\
+		PortsWidget.cpp	\
+		ProxyField.cpp \
+		ProxyWidget.cpp \
+		ClipNetProfile.cpp \
+		ResolvConfFile.cpp \
+		PkgTableItem.cpp \
+		PkgTable.cpp \
+		PkgListTab.cpp \
+		NetDaemonThread.cpp \
+		NetTab.cpp	\
+		NetAddrTab.cpp \
+		NetAdminTab.cpp \
+		NetFilterTab.cpp \
+		NetGwTab.cpp \
+		NetInterfaceTab.cpp \
+		NetJailTab.cpp \
+		NetPeerTab.cpp \
+		NetUmtsTab.cpp \
+		NetWifiTab.cpp \
+		TlsTunnelWidget.cpp \
+		YesNoField.cpp \
+		DownloadSourcesFrame.cpp \
+		frmNetMain.cpp	\
+		frmNetConst.cpp \
+		frmNetAdd.cpp	\
+		frmWifiSelect.cpp \
+		frmPkgMain.cpp \
+		frmDownloadMain.cpp \
+		frmDevicesMain.cpp \
+		frmDateTime.cpp	\
+		$(CLIPCONFIG_MOC)	\
+		frmUsersMain.cpp	\
+		frmUsersAdd.cpp	\
+                frmUsersMigrate.cpp \
+                HostsWidget.cpp \
+
+CLIPCHPW := clip-chpw
+CLIPCHPW_MOC = frmUsersChpw.moc.cpp 
+
+CLIPCHPW_SRC = clip-chpw.cpp \
+		consts.cpp	\
+		qtcommon.cpp	\
+		$(CLIPCHPW_MOC)	\
+		frmUsersChpw.cpp
+
+CLIPAUDIT := clip-audit-config
+CLIPAUDIT_MOC = frmAuditMain.moc.cpp \
+		LogRemoteFrame.moc.cpp 
+
+CLIPAUDIT_SRC = clip-audit-config.cpp 	\
+		$(CLIPAUDIT_MOC)	\
+		LogRemoteFrame.cpp	\
+		LogRotateFrame.cpp	\
+		consts.cpp		\
+		frmAuditMain.cpp
+
+
+
+EXES := ${CLIPCONFIG} ${CLIPCHPW} ${CLIPAUDIT}
+
+
+.PHONY: all build install uninstall clean mrproper
+
+all: build
+
+###############################################################
+ifndef VERBOSE
+MAKEFLAGS += -s --no-print-directory
+ECHO = echo
+else 
+ECHO = echo > /dev/null
+endif
+
+OBJS_DIR ?= obj
+CLIPCONFIG_OBJFILES := ${foreach file, ${patsubst %.cpp,%.o,${CLIPCONFIG_SRC}}, ${OBJS_DIR}/${file}}
+CLIPCHPW_OBJFILES := ${foreach file, ${patsubst %.cpp,%.o,${CLIPCHPW_SRC}}, ${OBJS_DIR}/${file}}
+CLIPAUDIT_OBJFILES := ${foreach file, ${patsubst %.cpp,%.o,${CLIPAUDIT_SRC}}, ${OBJS_DIR}/${file}}
+
+DEPS_DIR = ${OBJS_DIR}/.deps
+CLIPCONFIG_DEPFILES := ${foreach file, ${basename ${CLIPCONFIG_SRC}}, ${DEPS_DIR}/${file}.d}
+CLIPCHPW_DEPFILES := ${foreach file, ${basename ${CLIPCHPW_SRC}}, ${DEPS_DIR}/${file}.d}
+CLIPAUDIT_DEPFILES := ${foreach file, ${basename ${CLIPAUDIT_SRC}}, ${DEPS_DIR}/${file}.d}
+
+OBJFILES := ${CLIPCONFIG_OBJFILES} ${CLIPCHPW_OBJFILES} ${CLIPAUDIT_OBJFILES}
+DEPFILES := ${CLIPCONFIG_DEPFILES} ${CLIPCHPW_DEPFILES} ${CLIPCHPW_DEPFILES}
+MOCFILES := ${CLIPCONFIG_MOC} ${CLIPCHPW_MOC} ${CLIPCHPW_MOC}
+
+###############################################################
+
+${OBJS_DIR}:
+	mkdir -p ${OBJS_DIR}
+
+${DEPS_DIR}:
+	mkdir -p ${DEPS_DIR}
+
+
+${OBJS_DIR}/%.o:%.c Makefile
+	@${ECHO} "        CC        $<"
+	$(CC) $(CFLAGS) $(IFLAGS) -MT $@ -MD -MP -MF ${DEPS_DIR}/$*.d -c -o $@ $<
+
+${OBJS_DIR}/%.o:%.cpp Makefile
+	@${ECHO} "        CXX      $<"
+	$(CXX) $(CXXFLAGS) $(IFLAGS) -MT $@ -MD -MP -MF ${DEPS_DIR}/$*.d -c -o $@ $<
+
+%.moc.cpp: %.h Makefile
+	@${ECHO} "        MOC      $<"
+	$(MOC) -o $@ $<
+
+
+${CLIPCONFIG}: ${CLIPCONFIG_OBJFILES}
+	@${ECHO} "        LD       $@"
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS) -luserdc -lclip -lClipConfig -lClipWidgets
+
+${CLIPCHPW}: ${CLIPCHPW_OBJFILES}
+	@${ECHO} "        LD       $@"
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS) -luserdc -lclip -lClipWidgets
+
+${CLIPAUDIT}: ${CLIPAUDIT_OBJFILES}
+	@${ECHO} "        LD       $@"
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS) -lClipConfig -lClipWidgets
+
+build: ${OBJS_DIR} ${DEPS_DIR} ${MOCFILES} ${EXES}
+
+install: build
+	list='$(EXES)'; for exe in $$list; do \
+		${ECHO} "        INST              ${DESTDIR}${bindir}/$$exe" ;\
+		install -D $$exe ${DESTDIR}${bindir}/$$exe ;\
+	done
+
+uninstall: 
+	list='$(EXES)'; for exe in $$list; do \
+		${ECHO} "        RM                ${DESTDIR}${bindir}/$$exe" ;\
+		rm -f  ${DESTDIR}${bindir}/$$exe ;\
+	done
+
+clean:
+	@${ECHO} "        CLEAN             ${EXES} ${MOCFILES} ${OBJFILES}"
+	rm -f ${EXES} ${MOCFILES} ${OBJFILES} ${DEPFILES}
+
+mrproper: clean
+	rmdir ${DEPS_DIR} ${OBJS_DIR}
+	rm -f Makefile
+
+
+Makefile: Makefile.in ../config.status
+	cd .. && ./config.status && cd src
+
+
+-include ${DEPFILES}
